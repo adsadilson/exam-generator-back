@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.awt.desktop.ScreenSleepEvent;
 import java.security.Key;
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -22,14 +21,13 @@ import java.util.function.Function;
 @Component
 public class JwtService {
 
+    public static final String SECRET = "elEAnEZSLi8qbVhnHe3Cixkq7Ty2wMs6VVu8pjPZsNfrymC5pwvxTFMQmaGIKXCwGXsV47ImKLB9W42bqoy7R8L49fAH233yOkiIhQVSqmPceHduTzrzy0tv6R2YKUlm4tVb7ERnOwnT2qdJOt8cjpvd7n2F5bSXsDXp5CBJZOsP3uoHLlHUA2YvdO17NHU58Fi38JCVmVyddMKOVfwk7iD8Ws5xZOsXhBQd8hYi0ml3XTHGY3QTckQWCLkqnAdtZ";
+    public static final long EXPIRANTION_TIME = 1000 * 60 * 1; // 1 minuto
+
     public static void main(String[] args) {
         System.out.println(TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS));
         System.out.println(new BCryptPasswordEncoder().encode("adilson"));
     }
-
-
-    public static final String SECRET = "elEAnEZSLi8qbVhnHe3Cixkq7Ty2wMs6VVu8pjPZsNfrymC5pwvxTFMQmaGIKXCwGXsV47ImKLB9W42bqoy7R8L49fAH233yOkiIhQVSqmPceHduTzrzy0tv6R2YKUlm4tVb7ERnOwnT2qdJOt8cjpvd7n2F5bSXsDXp5CBJZOsP3uoHLlHUA2YvdO17NHU58Fi38JCVmVyddMKOVfwk7iD8Ws5xZOsXhBQd8hYi0ml3XTHGY3QTckQWCLkqnAdtZ";
-    public static final long EXPIRANTION_TIME = 1000 * 60 * 1; // 1 minuto
 
     public static String createSecretKey() {
         SecureRandom secureRandom = new SecureRandom();
@@ -69,7 +67,6 @@ public class JwtService {
         final String username = extrairUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
 
     public String generateToken(String userName) {
         Map<String, Object> claims = new HashMap<>();

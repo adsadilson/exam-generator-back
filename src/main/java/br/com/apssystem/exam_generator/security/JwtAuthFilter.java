@@ -52,11 +52,20 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authToken);
+                    token = "Bearer " + token;
+                    String tokenJson = String.format("{\"token\": %s", addQuotes(token));
+                    response.getWriter().write(tokenJson);
+                    response.addHeader("Content-Type", "application/json;charset=UTF-8");
+                    response.addHeader("Authorization", token);
                 }
             }
             filterChain.doFilter(request, response);
         } catch (ExpiredJwtException | SignatureException ex) {
             exceptionResolver.resolveException(request, response, null, ex);
         }
+    }
+
+    private String addQuotes(String value) {
+        return new StringBuilder(300).append("\"").append(value).append("\"").toString();
     }
 }
