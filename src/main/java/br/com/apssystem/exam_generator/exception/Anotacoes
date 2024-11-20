@@ -1,0 +1,92 @@
+ @PostConstruct
+    public void loadProductsFromDB() {
+        productList = IntStream.rangeClosed(1, 100)
+                .mapToObj(i -> Product.builder()
+                        .productId(i)
+                        .name("product " + i)
+                        .qty(new Random().nextInt(10))
+                        .price(new Random().nextInt(5000)).build()
+                ).collect(Collectors.toList());
+    }
+
+CREATE ROLE multi_tenant WITH
+	NOSUPERUSER
+	NOCREATEDB
+	NOCREATEROLE
+	INHERIT
+	LOGIN
+	NOREPLICATION
+	NOBYPASSRLS;
+
+
+uuid_in(md5(random()::text || now()::text)::cstring)  POSTGRES
+
+Incluir o contas as receber e pagar no relatorio de ativo e passivo
+
+ REFRESH MATERIALIZED VIEW saldo_geral_por_data_conta_areceber;
+
+  SELECT saldo_geral
+	FROM saldo_geral_por_data_conta_areceber
+	WHERE data_referencia = '2024-07-31';
+
+Comando de restore por schema dentro da pasta onde esta arquivo.
+pg_restore -h localhost -U postgres -d frota -n tenant_3 -v 20240724_bkp_tenant_3.sql
+
+
+#{fn:substring(despesa.descricao,0,28)}
+ngrok http http://localhost:8080
+
+StringUtils.stripAccents
+
+Join<Recebimento, ContaAReceber> contaAReceberJoin = root.join("contaAReceber");
+Join<ContaAReceber, Pessoa> clienteJoin = contaAReceberJoin.join("cliente");
+predicates.add(builder.equal(clienteJoin.get("id"), cliente.getId()));
+
+ <p:ajax event="close" update=":content" />
+
+ validatorMessage="Valor menor que o permitido 0,01!"
+  <f:validateDoubleRange minimum="0.01"/>
+
+$F{dataDocumento}.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+new java.text.DecimalFormat("R$ #,##0.00").format($F{valor})
+
+
+https://receitasdecodigo.com.br/java/como-incluir-biblioteca-jar-no-repositorio-local-do-maven
+mvn install:install-file -Dfile=/home/paraguai/Project/california-5.1.0/california-theme-5.1.0.jar -DgroupId=org.california -DartifactId=california-theme -Dversion=5.1.0 -Dpackaging=jar -DgeneratePom=true
+
+PrimeFaces.current().ajax().addCallbackParam("sucesso", true);
+
+$2a$10$m9kN/34YlCx/0CY4u1zVC.6h482/Mt6zIFydLkczG6yMqROdUbeUa    <script>
+        var showStatusTimeout;
+        var hideStatusTimeout;
+
+        function delayedShowStatus() {
+            showStatusTimeout = setTimeout(function() {
+                PF('start').show();
+            }, 0); // Defina o atraso desejado em milissegundos (2 segundos neste exemplo)
+        }
+
+        function delayedHideStatus() {
+            hideStatusTimeout = setTimeout(function() {
+                PF('start').hide();
+            }, 2000); // Defina a duração do tempo para ocultar o indicador após a ação Ajax ser concluída (2 segundos neste exemplo)
+        }
+
+        // Certifique-se de limpar os timeouts quando necessário
+        function clearStatusTimeouts() {
+            clearTimeout(showStatusTimeout);
+            clearTimeout(hideStatusTimeout);
+        }
+    }
+
+    </script>
+
+
+    <p:ajaxStatus onstart="delayedShowStatus2();" startEffect="none" onsuccess="delayedHideStatus2();"
+                                      stopEffect="none" stopEffectDuration="0" globla="false"/>
+                        <p:dialog widgetVar="start" modal="true" draggable="false" closable="false" resizable="false"
+                                  showHeader="true" header="Processando" footer="Aguarde..."
+                                  appendTo="@(body)" dynamic="false">
+                            <h:graphicImage library="img" name="ajax-loader.gif" id="imgAjaxLoader"
+                                            styleClass="bordaImagem"/>
+                        </p:dialog>
